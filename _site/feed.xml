@@ -1,44 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-06-29T23:30:20+08:00</updated><id>http://localhost:4000/</id><title type="html">Huihui Song’s Blog</title><subtitle>Huihui Song's personal blog website. I will record all my experience of learning.  My majors are python, AI, leedcode and math optimization.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-06-30T01:00:40+08:00</updated><id>http://localhost:4000/</id><title type="html">Huihui Song’s Blog</title><subtitle>Huihui Song's personal blog website. I will record all my experience of learning.  My majors are python, AI, leedcode and math optimization.
 U can also get my papers from zhihu: https://www.zhihu.com/people/wensse/pins/posts
 </subtitle><entry><title type="html">leedcode系列: Super Washing Machines</title><link href="http://localhost:4000/leedcode/2017/06/29/leedcode-super-washing-mathines.html" rel="alternate" type="text/html" title="leedcode系列: Super Washing Machines" /><published>2017-06-29T15:46:47+08:00</published><updated>2017-06-29T15:46:47+08:00</updated><id>http://localhost:4000/leedcode/2017/06/29/leedcode-super-washing-mathines</id><content type="html" xml:base="http://localhost:4000/leedcode/2017/06/29/leedcode-super-washing-mathines.html">&lt;h1 id=&quot;super-washing-machines&quot;&gt;Super Washing Machines&lt;/h1&gt;
 
 &lt;h2 id=&quot;question&quot;&gt;Question：&lt;/h2&gt;
-&lt;p&gt;You have n super washing machines on a line. Initially, each washing machine has some dresses or is empty.
-For each move, you could choose any m (1 ≤ m ≤ n) washing machines, and pass one dress of each washing machine to one of its adjacent washing machines at the same time .&lt;/p&gt;
+&lt;p&gt;You have n super washing machines on a line. Initially, each washing machine has some dresses or is empty.&lt;br /&gt;
+For each move, you could choose any m (1 ≤ m ≤ n) washing machines, and pass one dress of each washing machine to one of its adjacent washing machines at the same time .&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;Given an integer array representing the number of dresses in each washing machine from left to right on the line, you should find the minimum number of moves to make all the washing machines have the same number of dresses. If it is not possible to do it, return -1.&lt;/p&gt;
+&lt;p&gt;Given an integer array representing the number of dresses in each washing machine from left to right on the line, you should find the minimum number of moves to make all the washing machines have the same number of dresses. If it is not possible to do it, return -1.&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Example1&lt;/p&gt;
 
-&lt;p&gt;Input: [1,0,5]&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Input: [1,0,5]&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;Output: 3&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Output: 3&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;Explanation: 
+&lt;p&gt;Explanation: &lt;br /&gt;
 1st move:    1     0 &amp;lt;– 5    =&amp;gt;    1     1     4
 2nd move:    1 &amp;lt;– 1 &amp;lt;– 4    =&amp;gt;    2     1     3  &lt;br /&gt;
 3rd move:    2     1 &amp;lt;– 3    =&amp;gt;    2     2     2 &lt;br /&gt;
 Example2&lt;/p&gt;
 
-&lt;p&gt;Input: [0,3,0]&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Input: [0,3,0]&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;Output: 2&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Output: 2&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;Explanation: 
+&lt;p&gt;Explanation: &lt;br /&gt;
 1st move:    0 &amp;lt;– 3     0    =&amp;gt;    1     2     0  &lt;br /&gt;
 2nd move:    1     2 –&amp;gt; 0    =&amp;gt;    1     1     1   &lt;br /&gt;
 Example3&lt;/p&gt;
 
-&lt;p&gt;Input: [0,2,0]&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Input: [0,2,0]&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;Output: -1&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Output: -1&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;Explanation: 
-It’s impossible to make all the three washing machines have the same number of dresses. 
-Note:&lt;/p&gt;
+&lt;p&gt;Explanation: &lt;br /&gt;
+It’s impossible to make all the three washing machines have the same number of dresses. &lt;br /&gt;
+Note:&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;The range of n is [1, 10000].
-The range of dresses number in a super washing machine is [0, 1e5].&lt;/p&gt;
+&lt;p&gt;The range of n is [1, 10000].&lt;br /&gt;
+The range of dresses number in a super washing machine is [0, 1e5].&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;anwser&quot;&gt;Anwser:&lt;/h2&gt;
 &lt;p&gt;题目中的三个重要限定条件是：&lt;/p&gt;
@@ -87,29 +99,29 @@ The range of dresses number in a super washing machine is [0, 1e5].&lt;/p&gt;
 &lt;blockquote&gt;
   &lt;ol&gt;
     &lt;li&gt;对于左边的求和：left_sum = sum(machines[:idx])，在machines长度很长的时候，开销是很大的，因为这相当于内嵌了一层循环，可以改成left_sum += machines[idx - 1] if idx &amp;gt; 0 else 0的累加模式，去掉了内嵌循环；&lt;/li&gt;
-    &lt;li&gt;计算right_num时right_num = abs(left_num) - abs(ave - idx_val)，可见右边是恒不大于左边的，因此，右边的计算是多余的，可以去掉右边的计算，得到优化后的代码如下：
-      &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Solution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findMinMoves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;machines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-     &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
-     :type machines: List[int]
-     :rtype: int
-     &quot;&quot;&quot;&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;min_num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;all_sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;machines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;machines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;all_sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;ave&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left_sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;all_sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;machines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;idx_val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;machines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;left_sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;machines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;left_num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left_sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ave&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;max_curr_pick&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx_val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ave&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;idx_val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ave&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx_val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ave&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;min_num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left_num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max_curr_pick&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min_num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min_num&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-      &lt;/div&gt;
-    &lt;/li&gt;
+    &lt;li&gt;计算right_num时right_num = abs(left_num) - abs(ave - idx_val)，可见右边是恒不大于左边的，因此，右边的计算是多余的，可以去掉右边的计算，得到优化后的代码如下：&lt;br /&gt;&lt;/li&gt;
   &lt;/ol&gt;
 &lt;/blockquote&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Solution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findMinMoves&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;machines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+        :type machines: List[int]
+        :rtype: int
+        &quot;&quot;&quot;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;min_num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;all_sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;machines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;machines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;all_sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ave&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left_sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;all_sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;machines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;idx_val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;machines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;left_sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;machines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;left_num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left_sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ave&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;max_curr_pick&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx_val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ave&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;idx_val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ave&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx_val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ave&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;min_num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left_num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max_curr_pick&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min_num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min_num&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&quot;tecknique&quot;&gt;Tecknique:&lt;/h2&gt;
 &lt;ol&gt;
@@ -142,13 +154,13 @@ Given the following matrix:&lt;/p&gt;
 &lt;p&gt;分析条件&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;条件1限定计算的起始点是矩阵的一个角，其特点是使得我们可以在有限的起始n步中完整的走完一行或者一列;&lt;/li&gt;
-  &lt;li&gt;条件2，结合上述例子，我们可以将一个完整的螺旋圈（不含中间的5）的遍历顺序是： [1,2,3,6,9,8,7,4]，从上下左右四个边的角度来区分这8个数，可有两种方法：
-  2.1 方法1. 两条边的公共点算前一条边：[1,2,3]–&amp;gt;[6, 9]–&amp;gt;[8,7]–&amp;gt;[4]，
-  2.2 方法2. 两条边的公共点算后一条边：[1,2]–&amp;gt;[3,6]–&amp;gt;[9, 8]–&amp;gt;[7, 4]，&lt;/li&gt;
+  &lt;li&gt;条件2，结合上述例子，我们可以将一个完整的螺旋圈（不含中间的5）的遍历顺序是： [1,2,3,6,9,8,7,4]，从上下左右四个边的角度来区分这8个数，可有两种方法：&lt;br /&gt;
+  方法1. 两条边的公共点算前一条边：[1,2,3]–&amp;gt;[6, 9]–&amp;gt;[8,7]–&amp;gt;[4]，&lt;br /&gt;
+  方法2. 两条边的公共点算后一条边：[1,2]–&amp;gt;[3,6]–&amp;gt;[9, 8]–&amp;gt;[7, 4]，&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;仔细思考，其实两种分割方法可以得到两种不同思想的算法;
-  2.3 方法1. 由条件1作为基础，这个方法的特点是前一条边可以完整走完，走完后剩下的数字位置依然能形成一个完整的矩阵，而第二步的两个点[6, 9]又刚好成为剩下的矩阵的一条完整边，以此类推，这种分法使得每一步的一条边都刚好是剩下矩阵的一个完整边，这为递归方法的应用创造了条件; 同时由于每走完一条边之后剩下的点构成完整矩阵，这使得每一条边的数据都可以通过矩阵旋转使其变到左上角的起始位置. 可以得到代码如下：&lt;/p&gt;
+&lt;p&gt;仔细思考，其实两种分割方法可以得到两种不同思想的算法;&lt;br /&gt;
+  方法1. 由条件1作为基础，这个方法的特点是前一条边可以完整走完，走完后剩下的数字位置依然能形成一个完整的矩阵，而第二步的两个点[6, 9]又刚好成为剩下的矩阵的一条完整边，以此类推，这种分法使得每一步的一条边都刚好是剩下矩阵的一个完整边，这为递归方法的应用创造了条件; 同时由于每走完一条边之后剩下的点构成完整矩阵，这使得每一条边的数据都可以通过矩阵旋转使其变到左上角的起始位置. 可以得到代码如下：&lt;/p&gt;
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Solution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;spiralOrder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
         &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
@@ -194,10 +206,10 @@ Given the following matrix:&lt;/p&gt;
 &lt;h2 id=&quot;technique&quot;&gt;Technique&lt;/h2&gt;
 &lt;ol&gt;
   &lt;li&gt;递归思想可以简化逻辑，使代码简洁明了，但是一定要注意使用条件，&lt;/li&gt;
-  &lt;li&gt;zip可以实现矩阵的转秩，但其返回的内部列表是tuple，可以用map+list映射为list列表，
-map(list, zip(&lt;em&gt;array[::-1])) 实现矩阵顺时针旋转，
-map(list, zip(&lt;/em&gt;array)[::-1]) 实现矩阵顺时针旋转，
-更多zip技巧参考：
-&lt;a href=&quot;https://docs.python.org/3/library/functions.html?highlight=zip#zip&quot;&gt;python zip document&lt;/a&gt;
-&lt;a href=&quot;http://www.cnblogs.com/blogofwyl/p/4658571.html&quot;&gt;博客园-复制乔布斯-PYTHON中ZIP()函数用法&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;zip可以实现矩阵的转秩，但其返回的内部列表是tuple，可以用map+list映射为list列表，&lt;br /&gt;
+map(list, zip(&lt;em&gt;array[::-1])) 实现矩阵顺时针旋转，&lt;br /&gt;
+map(list, zip(&lt;/em&gt;array)[::-1]) 实现矩阵顺时针旋转，&lt;br /&gt;
+更多zip技巧参考：&lt;br /&gt;
+&lt;a href=&quot;https://docs.python.org/3/library/functions.html?highlight=zip#zip&quot;&gt;python zip document&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.cnblogs.com/blogofwyl/p/4658571.html&quot;&gt;博客园-复制乔布斯-PYTHON中ZIP()函数用法&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;</content><author><name></name></author><summary type="html">Spiral Matrix</summary></entry></feed>
