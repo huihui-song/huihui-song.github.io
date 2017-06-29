@@ -14,15 +14,18 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Huihui Song's Blog
-email: 821840032@qq.com; swb0426@163.com; swb0426@gmail.com
+email: 821840032@qq.com; swb0426@163.com
 description: > # this means to ignore newlines until "baseurl:"
     Huihui Song's personal blog website.
     I will record all my experience of learning. 
     My majors are python, AI, leedcode and math optimization.
+
+    U can also get my papers from zhihu: https://www.zhihu.com/people/wensse/pins/posts
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://huihui-song.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 
 github_username: huihui-song
+zhihu_username: https://www.zhihu.com/people/wensse/pins/posts
 
 # Build settings
 markdown: kramdown
