@@ -45,7 +45,7 @@ You should return [1,2,3,6,9,8,7,4,5].
         return (list(matrix.pop(0)) + self.spiralOrder(zip(*matrix)[::-1])) if matrix else []
         
 ```
-  方法2看起来每一条边的点数是固定的，固定为行或者列-1，这为循环取值创造了条件，若考虑到可以将矩阵整体逆时针旋转，这种分法的每一条边都是矩阵上面边除去最右点的顺序集合，而总共旋转的圈数是固定知道的：max([ceil(m/2), ceil(n/2)])，总共四条边构成一个圈，除去当前圈后的完整矩阵也是能计算的：rotate(anti_rotate(array[1:-1])[1:-1])，可以得到代码如下：
+  方法2看起来每一条边的点数是固定的，固定为行或者列-1，这为循环取值创造了条件，若考虑到可以将矩阵整体逆时针旋转，这种分法的每一条边都是矩阵上面边除去最右点的顺序集合，而总共旋转的圈数是固定知道的：min([ceil(m/2), ceil(n/2)])，总共四条边构成一个圈，除去当前圈后的完整矩阵也是能计算的：rotate(anti_rotate(array[1:-1])[1:-1])，可以得到代码如下：
 ```python
 class Solution(object):
     def spiralOrder(self, matrix):

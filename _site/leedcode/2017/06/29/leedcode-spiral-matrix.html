@@ -124,7 +124,7 @@ Given the following matrix:</p>
         
 </code></pre>
 </div>
-<p>方法2看起来每一条边的点数是固定的，固定为行或者列-1，这为循环取值创造了条件，若考虑到可以将矩阵整体逆时针旋转，这种分法的每一条边都是矩阵上面边除去最右点的顺序集合，而总共旋转的圈数是固定知道的：max([ceil(m/2), ceil(n/2)])，总共四条边构成一个圈，除去当前圈后的完整矩阵也是能计算的：rotate(anti_rotate(array[1:-1])[1:-1])，可以得到代码如下：</p>
+<p>方法2看起来每一条边的点数是固定的，固定为行或者列-1，这为循环取值创造了条件，若考虑到可以将矩阵整体逆时针旋转，这种分法的每一条边都是矩阵上面边除去最右点的顺序集合，而总共旋转的圈数是固定知道的：min([ceil(m/2), ceil(n/2)])，总共四条边构成一个圈，除去当前圈后的完整矩阵也是能计算的：rotate(anti_rotate(array[1:-1])[1:-1])，可以得到代码如下：</p>
 <div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">spiralOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">):</span>
         <span class="s">"""
