@@ -2,7 +2,7 @@
 layout: post
 title:  "leedcode系列: Super Washing Machines"
 date:   2017-06-29 15:46:47 +0800
-categories: code
+category: code
 ---
 
 

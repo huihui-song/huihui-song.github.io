@@ -1,11 +1,12 @@
 ---
 layout: default
-title: Artificial-Intelligence
-permalink: /ai/
+title: Quant
+permalink: /quant/
 ---
 
+
 {% for category in site.categories %}
-{% if category[0] == "ai" %}
+{% if category[0] == "quant" %}
 <ul class="arc-list">
     {% for post in category.last %}
         {{ post.date | date:"%d/%m/%Y"}}
