@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "leedcode系列: Spiral Matrix"
+title:  "leetcode: Spiral Matrix"
 date:   2017-06-29 +0800
 category: code
 ---
