@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>distribute: CAP Theory</title>
+  <meta name="description" content="CAP Theory">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/arch/2017/07/13/distributed-cap-theory.html">
+  <link rel="alternate" type="application/rss+xml" title="Huihui" href="/feed.xml">
+  
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">Huihui</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/about/">About</a>
+            
+          
+            
+            
+            <a class="page-link" href="/ai/">Artificial-Intelligence</a>
+            
+          
+            
+            
+            <a class="page-link" href="/arch/">Architecture</a>
+            
+          
+            
+            
+            <a class="page-link" href="/code/">Code</a>
+            
+          
+            
+            
+            <a class="page-link" href="/essay/">Essay</a>
+            
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/quant/">Quant</a>
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">distribute: CAP Theory</h1>
+    <p class="post-meta">
+      <time datetime="2017-07-13T00:00:00+08:00" itemprop="datePublished">
+        
+        Jul 13, 2017
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <h1 id="cap-theory">CAP Theory</h1>
+
+<h2 id="cap定理">CAP定理</h2>
+<p>CAP 由Eric Brewer在2000年PODC会议上提出，并于两年后被证明：</p>
+<blockquote>
+  <p>It is impossible for a web service to provide the three following guarantees: Consistency, Availability and Partition-tolerance.</p>
+</blockquote>
+
+<ol>
+  <li>Consistency: Every read receives the most recent write or an error;</li>
+  <li>Availability: Every request receives a (non-error) response - without guarantee that it contains the most recent write;</li>
+  <li>Partition-tolerance: The system continues to operate despite an arbitrary number of messages being dropped (or delayed) by the network between nodes.</li>
+</ol>
+
+<p>其意在表述一个分布式系统最多只能同时满足一致性、可用性、和分区容错性这三项中的两项。</p>
+
+<h3 id="consistency-一致性">Consistency 一致性</h3>
+
+<h4 id="一致性问题">一致性问题</h4>
+
+<p>分布式系统中最常见的一致性是数据一致性，即关联数据之间的逻辑关系是否正确和完整，通俗的讲就是由于数据的复制，不同数据节点中的数据内容是否完整并且相同。</p>
+
+<p>如果分布式系统中放弃了数据一致性，则系统中的数据不可信，系统失去意义。
+由于分布式系统有高可用性（通俗只多点部署）和高性能（通俗只通过负载均衡多点服务）要求，使得数据在系统中具有多个副本，当数据有更新(数据写)时必须同步更新所有副本，这种数据在多点间的复制机制是数据一致性问题的根源。（当然高可用性和高性能的需求前提是高并发，但高并发是需求而不是解决方案，不能当作问题根源）</p>
+
+<h4 id="一致性模型">一致性模型</h4>
+
+<p>强一致性： 当更新操作完成后，任何多个后续进程或者线程的访问都会返回最新的更新过的值。这种要求对用户很友好，但必须要求在更新数据的过程中进行进程锁/线程锁，这会对性能造成很大影响，也会对其他操作造成延时。</p>
+
+<p>弱一致性：系统并不保证后续进程或者线程的访问都会返回最新更新过的值，但会尽可能保证在某个时间级别之后可以让数据达到一致性状态。</p>
+
+<p>最终一致性：弱一致性的特定形式，系统保证在没有后续更新的情况下最终返回上一次更新操作的值，但不保证时间窗口。</p>
+
+<p>对于分布式系统，假设：N–数据复制的份数，W–更新数据时需要保证写完的节点数，R–读取数据的时候需要读取的节点数，如果W+R&gt;N，写的节点和读的节点重叠，则是强一致性，如果W+R&lt;=N，则是弱一致性，此时如果W&lt;(N+1)/2，并且写入的节点不重叠的话，则会存在写冲突。</p>
+
+<h3 id="availability-可用性">Availability 可用性</h3>
+
+<p>每一个操作总是能够在一定的时间（可容忍的时间）内返回结果，可终止、不会一直等待。</p>
+
+<h3 id="partition-tolerance-分区容错性">Partition-tolerance 分区容错性</h3>
+
+<p>分布式系统在遇到某节点或网络分区故障的时候，仍然能够对外提供满足一致性和可用性的服务。</p>
+
+<h2 id="cap的证明">CAP的证明</h2>
+<p><img src="/media/pics/1.png" alt="1.png" /></p>
+
+<p>如图是基本场景，N1、N2是两台计算机，A、B是应用程序，并且是分布式系统两个部分，V是分布式系统的数据存储的两个子数据库。</p>
+
+<p>在满足一致性的时候，N1和N2中的数据是一样的，满足可用性的时候，用户不管请求N2或N2都可以得到立即响应，满足分区容错性的情况下，N1和N2有任何一方宕机或者网络不通的时候，都不会影响N1和N2彼此的正常运作。</p>
+
+<p><img src="/media/pics/2.png" alt="2.png" /></p>
+
+<p>上图展示了数据更新时正常的运作流程，其中一个非常关键的地方在于2图中的数据同步操作M，M的成功依赖于分布式系统中的网络环境。而网络环境受外部不可控因素影响，当网络故障时，即M操作不成功时，如果我们不对此进行容错支持则不满足分区容错性，如果要容忍这种情况的出现，则需要对一致性和可用性进行取舍，具体如下图：</p>
+
+<p><img src="/media/pics/3.png" alt="3.png" /></p>
+
+<p>当M操作失败时，N1中存在数据V1，N2中存在数据V0，此时如果有向N2的请求达到，则：</p>
+
+<ol>
+  <li>响应旧的数据V0给用户，牺牲了数据一致性，</li>
+  <li>阻塞等待网络恢复，待数据更新完成后再响应，牺牲了可用性，</li>
+</ol>
+
+<p>以上过程，简短说明了CAP理论。</p>
+
+<h2 id="分布式事务">分布式事务</h2>
+
+<p>在分布式系统中，各个节点之间在物理上相互独立，通过网络进行沟通和协调，通过事务机制保证每个独立节点上的数据操作可以满足ACID原则。这里有分布式事务和ACID原则两个概念，解释如下：</p>
+
+<p>所谓分布式事务（DT，distributed transaction）：<br />
+即涉及到操作多个数据库的事务（广义可认为是事务的参与者、支持事务的服务器、资源服务器、事务管理器等分别位于不同的分布式系统的不同节点之上）。</p>
+
+<p>所谓（关系型数据库的）ACID原则：<br />
+在写入/异动资料的过程中，为保证交易正确可靠所必需具备的四个特性：即原子性（atomicity，不可分割性）、一致性（consistency，一个事务中相关联的数据在事务操作结束后是一致的）、隔离性（isolation，独立性）和持久性（durability）。</p>
+
+<p>分布式事务一般采用两阶段提交策略（二阶提交协议，two phase commitment protocol）来实现：<br />
+参与着将操作成败通知协调者，再由协调者根据所有参与者的反馈情况决定各参与者是否要提交操作还是终止操作。所谓两个阶段是指：第一阶段：准备阶段（投票阶段）和第二阶段：提交阶段（执行阶段）。</p>
+
+<p>准备阶段：事务协调者（事务管理者）给每个事务参与者（资源管理器）发送prepare消息，每个参与者要么直接返回失败（如果权限验证失败），要么在本地执行事务，写本地的redo和undo日志，但不提交，达到一种“万事具备，只欠东风”的状态。<br />
+提交阶段：如果协调者收到了参与者的失败消息或者超时，直接给每个参与者发送回滚（rollback）消息，如下图：</p>
+
+<p><img src="/media/pics/5.png" alt="5.png" /></p>
+
+<p>否则发送提交（commit）消息，如下图：</p>
+
+<p><img src="/media/pics/4.png" alt="4.png" /></p>
+
+<p>参与者根据协调者的指令执行提交或者回滚操作，释放所有事务处理过程中使用的锁资源。（注意：必须在最后阶段释放锁资源）</p>
+
+<p>两阶段提交策略中存在协调者，是因为一般情况下某一数据库无法知道其他数据库在做什么，因此一个DTP环境中交易中间件是必须的，协调者便是这种角色。</p>
+
+<p>两阶段提交是能够提供原子性操作，但同样也存在缺点：<br /></p>
+<ol>
+  <li>同步阻塞问题：执行过程中，所有参与节点都是事务阻塞型的，当参与者占有公共资源时，其他第三方节点访问公共资源不得不处于阻塞状态。</li>
+  <li>单点故障：一旦协调者发生故障，参与者会一直阻塞下去，尤其第二阶段，协调者发生故障，所有的参与者还都处于锁定事务资源的状态中，而无法继续完成事务状态，直到选出新的协调者。</li>
+  <li>数据不一致：在提交阶段，当协调者向参与者发送commit请求之后，发生局部网络异常或者在发送commit过程中协调者发生故障导致只有一部分参与者接受到了commit请求，这样不同节点执行commit不一致，导致整个分布式系统出现数据不一致的现象。</li>
+  <li>不确定状态：协调者在发出commit消息之后宕机，同时唯一接收到这条消息的参与者同时也宕机，这时即使选举出新的协调者，这条事务的状态也是不确定的，没人知道事务是否被已经提交。</li>
+</ol>
+
+<p>针对上述问题的提升方案是三阶段提交策略，其做了两个改进：</p>
+<ol>
+  <li>引入超时机制，同时在协调者和参与者中都引入超时机制。</li>
+  <li>在第一阶段和第二阶段中插入一个准备阶段，保证了在最后提交阶段之前各参与节点的状态是一致的。</li>
+</ol>
+
+<p>三阶段提交如下图所示：</p>
+
+<p><img src="/media/pics/6.png" alt="6.png" /></p>
+
+<p>三阶段提交解决了单点故障问题并减少阻塞，但并未解决分布式数据一致性问题，更进一步的解决方法是paxos算法，我会在之后的文章里专门写这个算法。</p>
+
+<h2 id="cap与数据库">CAP与数据库</h2>
+
+<p>最常使用的关系型数据库采用的是分布式事务机制提交数据，而因为分布式事务存在的问题使得系统效率降低和数据一致性问题，导致数据库系统扩展性（分区可容忍性Partition-tolerance）受到了限制，即取CP舍A或取CA舍P，这是符合分布式系统的CAP理论的。</p>
+
+<p>NoSQL数据库（如mongodb、redis）通常更注重性能和扩展性，而非事务机制（事务就是强一致性的体现），这也就是CAP中取AP舍C的体现，也是符合CAP理论的。</p>
+
+<p>后续我会专门写文章介绍NoSQL数据库与关系型数据库的原理和设计理念。</p>
+
+<h2 id="cap的权衡">CAP的权衡</h2>
+
+<p>CAP理论指出了系统设计中应该遵守的原则，它不是设计系统的障碍和思维枷锁，相反的，它能是我们更清楚的认识系统的需求，并指导我们进行优化。</p>
+
+<h3 id="一致性妥协">一致性妥协</h3>
+
+<p>实际系统中，由于并发量的存在、外部环境的不可控（硬件等）等等客观因素的存在，分区容错性是分布式系统的必须选项，依据CAP理论，我们在设计分布式系统时，只能在C/A中二选一或着做一定的妥协。而现实生活中，高并发量时的高可用性是我们追求的方向和要求，因此一致性妥协成了事实上的唯一选项。</p>
+
+<p>但一致性妥协不意味着我们放弃一致性，而是灵活运用一致性模式，在保证可靠性的情况下尽可能的在一致性和用户体验上达到某种平衡。</p>
+
+<p>上面提到的弱一致性和最终一致性便都是利用了用户体验不要求实时完全一致和做的策略平衡。<br />
+分别举个例子：<br /></p>
+<ol>
+  <li>在网络购物时，用户在抢单时是不需要一定知道商品是否有货的，这种不一定知道既可能是用户体验的妥协（想知道但可以忍受不知道），也可能是某种营销策略（抢购策略、饥饿营销等），无论哪种，都是基于在抢单阶段用户可以忍受数据不一致（实际状态与看到的状态）并且并发量大（抢的人越多越好）的前提，而在付款阶段由于涉及到用户切身重大利益，同时并发量较小（实际商品数量远小于用户数且付款时间远大于抢购时间），这时必须维护数据一致性，同时也据有维护一致性所需的时间成本。这两个事实需求不同而形成的明显分界的阶段的存在使得维护一致性的时间可以一定程度拖延，可以不满足实时性，也就是用弱一致性即可满足。很好地达到了一个用户体验和系统可靠的平衡。</li>
+  <li>银行转帐，这个世纪初系统不发达时转帐的实际生效是有时间间隔的，也就是以前说的2小时到帐等（实际上除开技术因素，更有可能是资金平衡周转因素），这在技术上就是弱一致性体现。而现在的实时到帐则要求数据的实时一致性，同时到帐短信通知可以在不确定时间范围内达到用户手机，则是最终一致性的体现。</li>
+</ol>
+
+<h3 id="12306的例子">12306的例子</h3>
+
+<p>淘宝服务器每年都要经受超大访问量的考验，如双十一等，而12306的峰值访问量是远不及淘宝的，但在12306进行深度优化前经常出现宕机的现象，为此饱受诟病。</p>
+
+<p>从分布式系统的角度分析，淘宝的商品信息是可以做缓存的，举个例子，多人同时抢单，我们可以返回给每个人缓存中的商品数据，之后再以一定的机制分配订单，这实际是一个最终一致性的应用，从CAP的角度看是取AP舍C了，同时也要看到每件商品与其他的商品关联度是比较小的，很多甚至是独立的，这为数据系统的一致性达成提供较好的环境。</p>
+
+<p>再分析12306,由于12306的商品是一个个座位，而每个座位的有无以及整体座位的数量是与每笔订单高度相关的，所以从商品构成来看，系统数据一致性要求很高，从数据库的角度看，高度关联的商品采用高度关联的数据库结构设计必不可少，这种数据库的ACID标准决定了其能取C舍A或P。这种强一致性的要求使得淘宝似的缓存机制（最终一致性）无法使用，这时在不得不同时保证P（因为并发量高单机性能和可靠性不能保证）的情况下，只能牺牲A，也就能解释为什么用户经常卡死服务经常宕机了，在CAP理论下这某种程度上是一个无奈的选择。</p>
+
+<p>而为了提高12306的可用性能，必须从数据一致性和分区容错性上做一定的妥协，或者说变通。<br /></p>
+<ol>
+  <li>数据一致性的妥协：在保证用户能正确看到车票状态和正确买到票的情况下，在精确性上做一些牺牲，比如将车票余票的多少用“有”、“无”、“&gt;100”等模糊但可接受的状态表示，在座位选择上，用“一等座”、“二等座”等无价格差异的等级制替代具体某个座位编号提供给用户。如此能较大程度的提高性能（可用性）。事实上，仔细分析可以看到，数据的一致性上依然是强一致的，这里妥协的并非一致性的强度，而是用户的非必要购物体验，即用户看不到具体有多少余票、也不能选择具体某个座位，这种体验的牺牲使得数据更新的频率降低，也即维护数据一致性成本降低（系统资源消耗降低），自然系统的可用性就提高了。</li>
+  <li>分区容错性上的妥协：将分布式系统每个节点的处理能力进行提升，则保持总体处理能力不变的情况下节点数量变少，分布式程度降低，同样系统维护数据一致性成本变小（要复制的次数少、同时节点间网络故障概率更少），事实上由于依然是分布式系统，依然具有分区容错性，优化的最后还是是维护一致性的成本，同样提高了系统可用性。</li>
+</ol>
+
+<h2 id="cap在交易系统中的应用">CAP在交易系统中的应用</h2>
+
+<p>交易系统中，产品的各个数据之间因为涉及到实际金钱，是必须要求强一致性的。所以依据CAP理论以及上述权衡理解，我们的优化方向应该集中在以下几点：</p>
+
+<ol>
+  <li>具体详细地拆分业务需求，将不需要强一致性的阶段用弱一致性或者最终一致性优化，</li>
+  <li>根据需求调整数据结构，通过模糊化等方法降低数据更新频率，达到降低维护一致性成本目的，</li>
+  <li>牺牲可用性保证容错性和一致性，保证容错就是保证利益。</li>
+</ol>
+
+<p>更多更详细的交易系统分布式设计我们在后续文章中进行说明。</p>
+
+<h2 id="参考文献">参考文献</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/CAP_theorem">wikipedia:  https://en.wikipedia.org/wiki/CAP_theorem</a><br />
+<a href="http://www.hollischuang.com/archives/663">关于分布式一致性研究：http://www.hollischuang.com/archives/663</a><br />
+<a href="http://www.hollischuang.com/archives/666">分布式系统的CAP理论：http://www.hollischuang.com/archives/666</a><br />
+<a href="http://xjsunjie.blog.51cto.com/999372/1885452">分布式系统之CAP理论详解：http://xjsunjie.blog.51cto.com/999372/1885452</a><br />
+<a href="http://www.infoq.com/cn/articles/cap-twelve-years-later-how-the-rules-have-changed">CAP理论十二年回顾–规则变了：http://www.infoq.com/cn/articles/cap-twelve-years-later-how-the-rules-have-changed</a></p>
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Huihui</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Huihui
+            
+            </li>
+            
+            <li><a href="mailto:821840032@qq.com; swb0426@163.com">821840032@qq.com; swb0426@163.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/huihui-song"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">huihui-song</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Huihui Song&#39;s personal blog website. I will record all my experience of learning.  My majors are python, AI, leedcode and math optimization.
+U can also get my papers from zhihu: https://www.zhihu.com/people/wensse
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

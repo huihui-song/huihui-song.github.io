@@ -1,6 +1,174 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-07-04T01:16:30+08:00</updated><id>http://localhost:4000/</id><title type="html">Huihui</title><subtitle>Huihui Song's personal blog website. I will record all my experience of learning.  My majors are python, AI, leedcode and math optimization.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-07-14T02:08:46+08:00</updated><id>http://localhost:4000/</id><title type="html">Huihui</title><subtitle>Huihui Song's personal blog website. I will record all my experience of learning.  My majors are python, AI, leedcode and math optimization.
 U can also get my papers from zhihu: https://www.zhihu.com/people/wensse
-</subtitle><entry><title type="html">leetcode: Basic Calculator II</title><link href="http://localhost:4000/code/2017/07/03/leetcode-basic-calculator-2.html" rel="alternate" type="text/html" title="leetcode: Basic Calculator II" /><published>2017-07-03T00:00:00+08:00</published><updated>2017-07-03T00:00:00+08:00</updated><id>http://localhost:4000/code/2017/07/03/leetcode-basic-calculator-2</id><content type="html" xml:base="http://localhost:4000/code/2017/07/03/leetcode-basic-calculator-2.html">&lt;h1 id=&quot;basic-calculator-ii&quot;&gt;Basic Calculator II&lt;/h1&gt;
+</subtitle><entry><title type="html">distribute: CAP Theory</title><link href="http://localhost:4000/arch/2017/07/13/distributed-cap-theory.html" rel="alternate" type="text/html" title="distribute: CAP Theory" /><published>2017-07-13T00:00:00+08:00</published><updated>2017-07-13T00:00:00+08:00</updated><id>http://localhost:4000/arch/2017/07/13/distributed-cap-theory</id><content type="html" xml:base="http://localhost:4000/arch/2017/07/13/distributed-cap-theory.html">&lt;h1 id=&quot;cap-theory&quot;&gt;CAP Theory&lt;/h1&gt;
+
+&lt;h2 id=&quot;cap定理&quot;&gt;CAP定理&lt;/h2&gt;
+&lt;p&gt;CAP 由Eric Brewer在2000年PODC会议上提出，并于两年后被证明：&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;It is impossible for a web service to provide the three following guarantees: Consistency, Availability and Partition-tolerance.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Consistency: Every read receives the most recent write or an error;&lt;/li&gt;
+  &lt;li&gt;Availability: Every request receives a (non-error) response - without guarantee that it contains the most recent write;&lt;/li&gt;
+  &lt;li&gt;Partition-tolerance: The system continues to operate despite an arbitrary number of messages being dropped (or delayed) by the network between nodes.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;其意在表述一个分布式系统最多只能同时满足一致性、可用性、和分区容错性这三项中的两项。&lt;/p&gt;
+
+&lt;h3 id=&quot;consistency-一致性&quot;&gt;Consistency 一致性&lt;/h3&gt;
+
+&lt;h4 id=&quot;一致性问题&quot;&gt;一致性问题&lt;/h4&gt;
+
+&lt;p&gt;分布式系统中最常见的一致性是数据一致性，即关联数据之间的逻辑关系是否正确和完整，通俗的讲就是由于数据的复制，不同数据节点中的数据内容是否完整并且相同。&lt;/p&gt;
+
+&lt;p&gt;如果分布式系统中放弃了数据一致性，则系统中的数据不可信，系统失去意义。
+由于分布式系统有高可用性（通俗只多点部署）和高性能（通俗只通过负载均衡多点服务）要求，使得数据在系统中具有多个副本，当数据有更新(数据写)时必须同步更新所有副本，这种数据在多点间的复制机制是数据一致性问题的根源。（当然高可用性和高性能的需求前提是高并发，但高并发是需求而不是解决方案，不能当作问题根源）&lt;/p&gt;
+
+&lt;h4 id=&quot;一致性模型&quot;&gt;一致性模型&lt;/h4&gt;
+
+&lt;p&gt;强一致性： 当更新操作完成后，任何多个后续进程或者线程的访问都会返回最新的更新过的值。这种要求对用户很友好，但必须要求在更新数据的过程中进行进程锁/线程锁，这会对性能造成很大影响，也会对其他操作造成延时。&lt;/p&gt;
+
+&lt;p&gt;弱一致性：系统并不保证后续进程或者线程的访问都会返回最新更新过的值，但会尽可能保证在某个时间级别之后可以让数据达到一致性状态。&lt;/p&gt;
+
+&lt;p&gt;最终一致性：弱一致性的特定形式，系统保证在没有后续更新的情况下最终返回上一次更新操作的值，但不保证时间窗口。&lt;/p&gt;
+
+&lt;p&gt;对于分布式系统，假设：N–数据复制的份数，W–更新数据时需要保证写完的节点数，R–读取数据的时候需要读取的节点数，如果W+R&amp;gt;N，写的节点和读的节点重叠，则是强一致性，如果W+R&amp;lt;=N，则是弱一致性，此时如果W&amp;lt;(N+1)/2，并且写入的节点不重叠的话，则会存在写冲突。&lt;/p&gt;
+
+&lt;h3 id=&quot;availability-可用性&quot;&gt;Availability 可用性&lt;/h3&gt;
+
+&lt;p&gt;每一个操作总是能够在一定的时间（可容忍的时间）内返回结果，可终止、不会一直等待。&lt;/p&gt;
+
+&lt;h3 id=&quot;partition-tolerance-分区容错性&quot;&gt;Partition-tolerance 分区容错性&lt;/h3&gt;
+
+&lt;p&gt;分布式系统在遇到某节点或网络分区故障的时候，仍然能够对外提供满足一致性和可用性的服务。&lt;/p&gt;
+
+&lt;h2 id=&quot;cap的证明&quot;&gt;CAP的证明&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/media/pics/1.png&quot; alt=&quot;1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如图是基本场景，N1、N2是两台计算机，A、B是应用程序，并且是分布式系统两个部分，V是分布式系统的数据存储的两个子数据库。&lt;/p&gt;
+
+&lt;p&gt;在满足一致性的时候，N1和N2中的数据是一样的，满足可用性的时候，用户不管请求N2或N2都可以得到立即响应，满足分区容错性的情况下，N1和N2有任何一方宕机或者网络不通的时候，都不会影响N1和N2彼此的正常运作。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/pics/2.png&quot; alt=&quot;2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;上图展示了数据更新时正常的运作流程，其中一个非常关键的地方在于2图中的数据同步操作M，M的成功依赖于分布式系统中的网络环境。而网络环境受外部不可控因素影响，当网络故障时，即M操作不成功时，如果我们不对此进行容错支持则不满足分区容错性，如果要容忍这种情况的出现，则需要对一致性和可用性进行取舍，具体如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/pics/3.png&quot; alt=&quot;3.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;当M操作失败时，N1中存在数据V1，N2中存在数据V0，此时如果有向N2的请求达到，则：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;响应旧的数据V0给用户，牺牲了数据一致性，&lt;/li&gt;
+  &lt;li&gt;阻塞等待网络恢复，待数据更新完成后再响应，牺牲了可用性，&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;以上过程，简短说明了CAP理论。&lt;/p&gt;
+
+&lt;h2 id=&quot;分布式事务&quot;&gt;分布式事务&lt;/h2&gt;
+
+&lt;p&gt;在分布式系统中，各个节点之间在物理上相互独立，通过网络进行沟通和协调，通过事务机制保证每个独立节点上的数据操作可以满足ACID原则。这里有分布式事务和ACID原则两个概念，解释如下：&lt;/p&gt;
+
+&lt;p&gt;所谓分布式事务（DT，distributed transaction）：&lt;br /&gt;
+即涉及到操作多个数据库的事务（广义可认为是事务的参与者、支持事务的服务器、资源服务器、事务管理器等分别位于不同的分布式系统的不同节点之上）。&lt;/p&gt;
+
+&lt;p&gt;所谓（关系型数据库的）ACID原则：&lt;br /&gt;
+在写入/异动资料的过程中，为保证交易正确可靠所必需具备的四个特性：即原子性（atomicity，不可分割性）、一致性（consistency，一个事务中相关联的数据在事务操作结束后是一致的）、隔离性（isolation，独立性）和持久性（durability）。&lt;/p&gt;
+
+&lt;p&gt;分布式事务一般采用两阶段提交策略（二阶提交协议，two phase commitment protocol）来实现：&lt;br /&gt;
+参与着将操作成败通知协调者，再由协调者根据所有参与者的反馈情况决定各参与者是否要提交操作还是终止操作。所谓两个阶段是指：第一阶段：准备阶段（投票阶段）和第二阶段：提交阶段（执行阶段）。&lt;/p&gt;
+
+&lt;p&gt;准备阶段：事务协调者（事务管理者）给每个事务参与者（资源管理器）发送prepare消息，每个参与者要么直接返回失败（如果权限验证失败），要么在本地执行事务，写本地的redo和undo日志，但不提交，达到一种“万事具备，只欠东风”的状态。&lt;br /&gt;
+提交阶段：如果协调者收到了参与者的失败消息或者超时，直接给每个参与者发送回滚（rollback）消息，如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/pics/5.png&quot; alt=&quot;5.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;否则发送提交（commit）消息，如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/pics/4.png&quot; alt=&quot;4.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;参与者根据协调者的指令执行提交或者回滚操作，释放所有事务处理过程中使用的锁资源。（注意：必须在最后阶段释放锁资源）&lt;/p&gt;
+
+&lt;p&gt;两阶段提交策略中存在协调者，是因为一般情况下某一数据库无法知道其他数据库在做什么，因此一个DTP环境中交易中间件是必须的，协调者便是这种角色。&lt;/p&gt;
+
+&lt;p&gt;两阶段提交是能够提供原子性操作，但同样也存在缺点：&lt;br /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;同步阻塞问题：执行过程中，所有参与节点都是事务阻塞型的，当参与者占有公共资源时，其他第三方节点访问公共资源不得不处于阻塞状态。&lt;/li&gt;
+  &lt;li&gt;单点故障：一旦协调者发生故障，参与者会一直阻塞下去，尤其第二阶段，协调者发生故障，所有的参与者还都处于锁定事务资源的状态中，而无法继续完成事务状态，直到选出新的协调者。&lt;/li&gt;
+  &lt;li&gt;数据不一致：在提交阶段，当协调者向参与者发送commit请求之后，发生局部网络异常或者在发送commit过程中协调者发生故障导致只有一部分参与者接受到了commit请求，这样不同节点执行commit不一致，导致整个分布式系统出现数据不一致的现象。&lt;/li&gt;
+  &lt;li&gt;不确定状态：协调者在发出commit消息之后宕机，同时唯一接收到这条消息的参与者同时也宕机，这时即使选举出新的协调者，这条事务的状态也是不确定的，没人知道事务是否被已经提交。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;针对上述问题的提升方案是三阶段提交策略，其做了两个改进：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;引入超时机制，同时在协调者和参与者中都引入超时机制。&lt;/li&gt;
+  &lt;li&gt;在第一阶段和第二阶段中插入一个准备阶段，保证了在最后提交阶段之前各参与节点的状态是一致的。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;三阶段提交如下图所示：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/pics/6.png&quot; alt=&quot;6.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;三阶段提交解决了单点故障问题并减少阻塞，但并未解决分布式数据一致性问题，更进一步的解决方法是paxos算法，我会在之后的文章里专门写这个算法。&lt;/p&gt;
+
+&lt;h2 id=&quot;cap与数据库&quot;&gt;CAP与数据库&lt;/h2&gt;
+
+&lt;p&gt;最常使用的关系型数据库采用的是分布式事务机制提交数据，而因为分布式事务存在的问题使得系统效率降低和数据一致性问题，导致数据库系统扩展性（分区可容忍性Partition-tolerance）受到了限制，即取CP舍A或取CA舍P，这是符合分布式系统的CAP理论的。&lt;/p&gt;
+
+&lt;p&gt;NoSQL数据库（如mongodb、redis）通常更注重性能和扩展性，而非事务机制（事务就是强一致性的体现），这也就是CAP中取AP舍C的体现，也是符合CAP理论的。&lt;/p&gt;
+
+&lt;p&gt;后续我会专门写文章介绍NoSQL数据库与关系型数据库的原理和设计理念。&lt;/p&gt;
+
+&lt;h2 id=&quot;cap的权衡&quot;&gt;CAP的权衡&lt;/h2&gt;
+
+&lt;p&gt;CAP理论指出了系统设计中应该遵守的原则，它不是设计系统的障碍和思维枷锁，相反的，它能是我们更清楚的认识系统的需求，并指导我们进行优化。&lt;/p&gt;
+
+&lt;h3 id=&quot;一致性妥协&quot;&gt;一致性妥协&lt;/h3&gt;
+
+&lt;p&gt;实际系统中，由于并发量的存在、外部环境的不可控（硬件等）等等客观因素的存在，分区容错性是分布式系统的必须选项，依据CAP理论，我们在设计分布式系统时，只能在C/A中二选一或着做一定的妥协。而现实生活中，高并发量时的高可用性是我们追求的方向和要求，因此一致性妥协成了事实上的唯一选项。&lt;/p&gt;
+
+&lt;p&gt;但一致性妥协不意味着我们放弃一致性，而是灵活运用一致性模式，在保证可靠性的情况下尽可能的在一致性和用户体验上达到某种平衡。&lt;/p&gt;
+
+&lt;p&gt;上面提到的弱一致性和最终一致性便都是利用了用户体验不要求实时完全一致和做的策略平衡。&lt;br /&gt;
+分别举个例子：&lt;br /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;在网络购物时，用户在抢单时是不需要一定知道商品是否有货的，这种不一定知道既可能是用户体验的妥协（想知道但可以忍受不知道），也可能是某种营销策略（抢购策略、饥饿营销等），无论哪种，都是基于在抢单阶段用户可以忍受数据不一致（实际状态与看到的状态）并且并发量大（抢的人越多越好）的前提，而在付款阶段由于涉及到用户切身重大利益，同时并发量较小（实际商品数量远小于用户数且付款时间远大于抢购时间），这时必须维护数据一致性，同时也据有维护一致性所需的时间成本。这两个事实需求不同而形成的明显分界的阶段的存在使得维护一致性的时间可以一定程度拖延，可以不满足实时性，也就是用弱一致性即可满足。很好地达到了一个用户体验和系统可靠的平衡。&lt;/li&gt;
+  &lt;li&gt;银行转帐，这个世纪初系统不发达时转帐的实际生效是有时间间隔的，也就是以前说的2小时到帐等（实际上除开技术因素，更有可能是资金平衡周转因素），这在技术上就是弱一致性体现。而现在的实时到帐则要求数据的实时一致性，同时到帐短信通知可以在不确定时间范围内达到用户手机，则是最终一致性的体现。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;12306的例子&quot;&gt;12306的例子&lt;/h3&gt;
+
+&lt;p&gt;淘宝服务器每年都要经受超大访问量的考验，如双十一等，而12306的峰值访问量是远不及淘宝的，但在12306进行深度优化前经常出现宕机的现象，为此饱受诟病。&lt;/p&gt;
+
+&lt;p&gt;从分布式系统的角度分析，淘宝的商品信息是可以做缓存的，举个例子，多人同时抢单，我们可以返回给每个人缓存中的商品数据，之后再以一定的机制分配订单，这实际是一个最终一致性的应用，从CAP的角度看是取AP舍C了，同时也要看到每件商品与其他的商品关联度是比较小的，很多甚至是独立的，这为数据系统的一致性达成提供较好的环境。&lt;/p&gt;
+
+&lt;p&gt;再分析12306,由于12306的商品是一个个座位，而每个座位的有无以及整体座位的数量是与每笔订单高度相关的，所以从商品构成来看，系统数据一致性要求很高，从数据库的角度看，高度关联的商品采用高度关联的数据库结构设计必不可少，这种数据库的ACID标准决定了其能取C舍A或P。这种强一致性的要求使得淘宝似的缓存机制（最终一致性）无法使用，这时在不得不同时保证P（因为并发量高单机性能和可靠性不能保证）的情况下，只能牺牲A，也就能解释为什么用户经常卡死服务经常宕机了，在CAP理论下这某种程度上是一个无奈的选择。&lt;/p&gt;
+
+&lt;p&gt;而为了提高12306的可用性能，必须从数据一致性和分区容错性上做一定的妥协，或者说变通。&lt;br /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;数据一致性的妥协：在保证用户能正确看到车票状态和正确买到票的情况下，在精确性上做一些牺牲，比如将车票余票的多少用“有”、“无”、“&amp;gt;100”等模糊但可接受的状态表示，在座位选择上，用“一等座”、“二等座”等无价格差异的等级制替代具体某个座位编号提供给用户。如此能较大程度的提高性能（可用性）。事实上，仔细分析可以看到，数据的一致性上依然是强一致的，这里妥协的并非一致性的强度，而是用户的非必要购物体验，即用户看不到具体有多少余票、也不能选择具体某个座位，这种体验的牺牲使得数据更新的频率降低，也即维护数据一致性成本降低（系统资源消耗降低），自然系统的可用性就提高了。&lt;/li&gt;
+  &lt;li&gt;分区容错性上的妥协：将分布式系统每个节点的处理能力进行提升，则保持总体处理能力不变的情况下节点数量变少，分布式程度降低，同样系统维护数据一致性成本变小（要复制的次数少、同时节点间网络故障概率更少），事实上由于依然是分布式系统，依然具有分区容错性，优化的最后还是是维护一致性的成本，同样提高了系统可用性。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;cap在交易系统中的应用&quot;&gt;CAP在交易系统中的应用&lt;/h2&gt;
+
+&lt;p&gt;交易系统中，产品的各个数据之间因为涉及到实际金钱，是必须要求强一致性的。所以依据CAP理论以及上述权衡理解，我们的优化方向应该集中在以下几点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;具体详细地拆分业务需求，将不需要强一致性的阶段用弱一致性或者最终一致性优化，&lt;/li&gt;
+  &lt;li&gt;根据需求调整数据结构，通过模糊化等方法降低数据更新频率，达到降低维护一致性成本目的，&lt;/li&gt;
+  &lt;li&gt;牺牲可用性保证容错性和一致性，保证容错就是保证利益。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;更多更详细的交易系统分布式设计我们在后续文章中进行说明。&lt;/p&gt;
+
+&lt;h2 id=&quot;参考文献&quot;&gt;参考文献&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/CAP_theorem&quot;&gt;wikipedia:  https://en.wikipedia.org/wiki/CAP_theorem&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.hollischuang.com/archives/663&quot;&gt;关于分布式一致性研究：http://www.hollischuang.com/archives/663&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.hollischuang.com/archives/666&quot;&gt;分布式系统的CAP理论：http://www.hollischuang.com/archives/666&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://xjsunjie.blog.51cto.com/999372/1885452&quot;&gt;分布式系统之CAP理论详解：http://xjsunjie.blog.51cto.com/999372/1885452&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.infoq.com/cn/articles/cap-twelve-years-later-how-the-rules-have-changed&quot;&gt;CAP理论十二年回顾–规则变了：http://www.infoq.com/cn/articles/cap-twelve-years-later-how-the-rules-have-changed&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="arch" /><summary type="html">CAP Theory</summary></entry><entry><title type="html">leetcode: Basic Calculator II</title><link href="http://localhost:4000/code/2017/07/03/leetcode-basic-calculator-2.html" rel="alternate" type="text/html" title="leetcode: Basic Calculator II" /><published>2017-07-03T00:00:00+08:00</published><updated>2017-07-03T00:00:00+08:00</updated><id>http://localhost:4000/code/2017/07/03/leetcode-basic-calculator-2</id><content type="html" xml:base="http://localhost:4000/code/2017/07/03/leetcode-basic-calculator-2.html">&lt;h1 id=&quot;basic-calculator-ii&quot;&gt;Basic Calculator II&lt;/h1&gt;
 
 &lt;h2 id=&quot;question&quot;&gt;Question&lt;/h2&gt;
 &lt;p&gt;Implement a basic calculator to evaluate a simple expression string.&lt;/p&gt;
