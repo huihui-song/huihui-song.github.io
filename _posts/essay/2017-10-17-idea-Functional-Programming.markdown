@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "idea: Functionak Programming"
+title:  "idea: Functional Programming Guide"
 date:   2017-10-17 +0800
 category: essay
 ---
 
-# Functionak Programming
+# Functional Programming Guide
 
 本文全文系转载，原文地址：http://www.cnblogs.com/kym/archive/2011/03/07/1976519.html#!comments
 
