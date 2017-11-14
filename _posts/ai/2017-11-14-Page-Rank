@@ -1,13 +1,38 @@
 ---
 layout: post
-title:  "python: Dict To Object"
-date:   2017-07-18 +0800
-category: code
+title:  "BigData: Page Rank"
+date:   2017-11-14 +0800
+category: ai
 ---
 
 # Dict To Object
 
-## Question
+## Index
+
+1. 算法来源
+2. 算法原理
+3. 算法证明
+4. PR值的计算方法
+5. 算法实现
+6. PR的缺点
+
+参考资料
+
+## 算法来源
+PR由个google在开发搜索引擎时提出，最早的搜索引擎采用的是 “分类目录” 的方法，即通过人工进行网页分类并整理出高质量的网站。这种检索方式非常清晰也易于控制，
+但缺点也很明显，即当网页数量与所需的人力资源成线性正比，在知识爆炸时代来临后人工分类力不从心。
+
+这个时候的一种较好的解决方案是：文本检索，即计算用户查询关键词与网页内容的相关性程度来返回搜索结果。这种方式把人从分类中解放出来，但由于分词匹配维度的考虑限制，
+以及网页作弊行为（即某些网页来回地倒腾某些关键词使自己的搜索结果排名考前），导致搜索结果不理想。
+
+为解决搜索引擎对搜索结果评判方式不理想的问题，google发明了page rank算法，算法的核心思想如下：
+
+1. 如果一个网页被很多其他网页链接到的话说明这个网页比较重要，也就是PageRank值相对较高;
+2. 如果一个PageRank值很高的网页链接到一个其他的网页，那么被链接到的网页的PageRank值会相应的因此而提高;
+
+## 算法原理
+假设一个所有的上网者都是在随即浏览网页，并且从一个网页跳转到下一个网页的过程也是完全随机的。这是PageRank算法基于人群上网行为的前提。
+
 
 实际应用中，为了方便用户书写或者说统一借口规范，在进行程序开发时通常会提供给用户对象接口，这样用户可以通过访问对象属性直接获取某些必要的值，程序显得清晰美观。
 
@@ -55,7 +80,7 @@ In [14]: class A(object):
    ....:         self.y = 2
    ....:     def foo(self):
    ....:         self.z = 3
-   ....:         
+   ....:
 
 In [15]: a = A()
 
@@ -114,7 +139,7 @@ In [20]: class Obj(object):
 In [21]: class Obj(object):
    ....:     def to_object(self, **dictionary):
    ....:         self.__dict__.update(dictionary)
-   ....:         
+   ....:
 
 ```
 
@@ -179,13 +204,13 @@ print x.url.domain
 相对而言，这种就比较简单了，可以直接利用object的__dict__属性，
 
 ```python
-def to_dict(obj):  
-    pr = {}  
-    for name in dir(obj):  
-        value = getattr(obj, name)  
-        if not.name.startswith('__') and not callable(value):  
-            pr[name] = value  
-    return pr  
+def to_dict(obj):
+    pr = {}
+    for name in dir(obj):
+        value = getattr(obj, name)
+        if not.name.startswith('__') and not callable(value):
+            pr[name] = value
+    return pr
 ```
 
 ## References
